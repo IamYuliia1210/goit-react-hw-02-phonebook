@@ -22,7 +22,10 @@ ul {
    padding: 0;
 }
 
- p, h1 {
+ h1, h2 {
+   margin: 15px;
+ }
+p {
    margin: 0;
  }
 `;

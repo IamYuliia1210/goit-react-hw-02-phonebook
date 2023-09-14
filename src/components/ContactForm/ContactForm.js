@@ -1,5 +1,6 @@
 import * as yup from 'yup';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { Formik } from 'formik';
+import { User, Label, StyledField, Button, ErrMsg } from './ContactForm.styled';
 
 const schema = yup.object().shape({
   name: yup
@@ -23,9 +24,9 @@ const initialValues = {
   number: '',
 };
 
-export const ContactForm = () => {
+export const ContactForm = ({ handleSubmit }) => {
   const handleSumbit = (values, { resetForm }) => {
-    console.log(values);
+    handleSubmit({ ...values });
     resetForm();
   };
   return (
@@ -35,27 +36,27 @@ export const ContactForm = () => {
         onSubmit={handleSumbit}
         validationSchema={schema}
       >
-        <Form>
-          <label htmlFor="name">Name</label>
-          <Field
+        <User>
+          <Label htmlFor="name">Name</Label>
+          <StyledField
             type="text"
             name="name"
             placeholder="Name"
             title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
             required
           />
-          <ErrorMessage name="name" component="div" />
-          <label htmlFor="tel">Number</label>
-          <Field
+          <ErrMsg name="name" component="div" />
+          <Label htmlFor="tel">Number</Label>
+          <StyledField
             type="tel"
             name="number"
             placeholder="Number"
             title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
             required
           />
-          <ErrorMessage name="number" component="div" />
-          <button type="submit">Add contact</button>
-        </Form>
+          <ErrMsg name="number" component="div" />
+          <Button type="submit">Add contact</Button>
+        </User>
       </Formik>
     </div>
   );
